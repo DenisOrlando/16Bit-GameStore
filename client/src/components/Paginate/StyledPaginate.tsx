@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledPaginate = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 3.2rem;
 `;
 
