@@ -8,6 +8,7 @@ import { Dropdown, StyledSVG } from "../../GlobalStyles/GlobalStyles";
 import { Title } from "../index";
 import { Store } from "../../redux/reducer";
 import { ProductInCart } from "../../interfaces";
+import { useAuth0 } from "@auth0/auth0-react";
 
 //Logos
 import cart from "../../assets/img/svg/cart2.svg";
@@ -30,7 +31,7 @@ const NavBar: FC<Props> = ({ setPage, toggleModal }: any) => {
 
   const cartNumber: any = useSelector(
     (state: Store) => state.cartReducer.cart.list
-  ); 
+  );
 
   /* const cartNumber : any = JSON.parse(localStorage.getItem("cart")!); */
 
@@ -38,6 +39,10 @@ const NavBar: FC<Props> = ({ setPage, toggleModal }: any) => {
     acc = acc + prod.quantity!;
     return acc;
   }, 0);
+
+  // Auth0
+
+  const { loginWithRedirect, logout } = useAuth0();
 
   return (
     <StyledNavBar>
@@ -56,14 +61,25 @@ const NavBar: FC<Props> = ({ setPage, toggleModal }: any) => {
               <ul>
                 <>
                   <li>
-                    <Link to="/login" className="dropdown__button">
-                      Login
+                    <Link to="/profile" className="dropdown__button">
+                      Profile
                     </Link>
                   </li>
                   <li>
-                    <Link to="/signup" className="dropdown__button">
-                      Signup
-                    </Link>
+                    <button
+                      onClick={loginWithRedirect}
+                      className="dropdown__button"
+                    >
+                      Login
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => logout()}
+                      className="dropdown__button"
+                    >
+                      Logout
+                    </button>
                   </li>
                 </>
               </ul>

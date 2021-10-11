@@ -24,26 +24,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(600),
       allowNull: true,
     },
-    address_user: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     email_user: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    password_user: {
-      type: DataTypes.STRING(60),
-      allowNull: true,
     },
     is_admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    is_active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-
   });
 };

@@ -15,6 +15,7 @@ import {
   Privacy,
   Legal,
   Order,
+  UserProfile,
 } from "./pages/";
 import { NavBar, Footer, About, CartSideBar } from "./components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -27,8 +28,6 @@ import { Product } from "./interfaces";
 import { toggleCart } from "./redux/actions/global_actions";
 import { getCart } from "../src/redux/actions/cart_actions";
 
-
-
 const App: FC = () => {
   const dispatch = useDispatch();
   const totalProducts: any = useSelector(
@@ -37,8 +36,6 @@ const App: FC = () => {
   const deleteNav: any = useSelector(
     (state: Store) => state.adminReducer.navbar
   );
-
-  
 
   //Paginate
   // const [order, setOrder] = useState<string>("");
@@ -68,8 +65,9 @@ const App: FC = () => {
     <Theme /* none="none" */>
       <GlobalStyle />
       <Router>
-
-      {deleteNav && <NavBar setPage={setCurrentPage} toggleModal={toggleModal} /> }
+        {deleteNav && (
+          <NavBar setPage={setCurrentPage} toggleModal={toggleModal} />
+        )}
 
         <CartSideBar closeCallback={toggleModal} show={showCart} />
         <Switch>
@@ -82,6 +80,7 @@ const App: FC = () => {
               pages={pages}
             />
           </Route>
+          <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/cart" component={CartSideBar} />
           <Route exact path="/game/:id" component={ProductDetail} />
           <Route exact path="/form" component={FormProduct} />
